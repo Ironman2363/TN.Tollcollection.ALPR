@@ -33,27 +33,16 @@ namespace TN.Tollcollection.ALPR.Entity
             timestamp = data.timestamp_local;
             usage = new Usage();
             processing_time  = DateTime.ParseExact(data.results.position_sec,"h:mm:ss.ffffff",CultureInfo.InvariantCulture).Millisecond;
-
-
             List<ResultData> resultDataList = new List<ResultData>();
             resultDataList.Add(data.results);
-            //Result[] resultArray = new Result[resultDataList.Count];
-
             List<Result> resultList1 = new List<Result>();
             foreach (ResultData resultData in resultDataList)
             {
                 var result3 = new Result(resultData);
                 resultList1.Add(result3);
             }
-
             results = resultList1.ToArray();
-
-
         }
-
-
-
-
     }
 
 
@@ -88,7 +77,6 @@ namespace TN.Tollcollection.ALPR.Entity
             region = new Region(data.plate.props.regions);
             vehicle = new Vehicle(data.vehicle);
             score = data.plate.score;
-            //candidates = new Candidate[data.plate.props.plate.Length];
             List<Candidate> candidateList = new List<Candidate>();
             foreach (PlateData plate in data.plate.props.plate)
             {
@@ -97,8 +85,6 @@ namespace TN.Tollcollection.ALPR.Entity
 
             }
             candidates = candidateList.ToArray();
-
-
         }
     }
 
@@ -108,7 +94,6 @@ namespace TN.Tollcollection.ALPR.Entity
         public int ymin { get; set; }
         public int xmax { get; set; }
         public int ymax { get; set; }
-
 
         public Box()
         {
@@ -130,7 +115,6 @@ namespace TN.Tollcollection.ALPR.Entity
 
         public string code { get; set; }
         public float score { get; set; }
-
 
         public Region()
         {
