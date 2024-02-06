@@ -14,7 +14,7 @@ namespace TN.Tollcollection.ALPR.Entity
         public string timestamp_local { get; set; }
 
 
-    } 
+    }
 
     public class ResultData
     {

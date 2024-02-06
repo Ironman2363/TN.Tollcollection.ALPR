@@ -32,7 +32,7 @@ namespace TN.Tollcollection.ALPR.Entity
             camera_id = data.camera_id;
             timestamp = data.timestamp_local;
             usage = new Usage();
-            processing_time  = DateTime.ParseExact(data.results.position_sec,"h:mm:ss.ffffff",CultureInfo.InvariantCulture).Millisecond;
+            processing_time = DateTime.ParseExact(data.results.position_sec, "h:mm:ss.ffffff", CultureInfo.InvariantCulture).Millisecond;
             List<ResultData> resultDataList = new List<ResultData>();
             resultDataList.Add(data.results);
             List<Result> resultList1 = new List<Result>();
@@ -123,7 +123,7 @@ namespace TN.Tollcollection.ALPR.Entity
 
         public Region(RegionsData data)
         {
-            if( data.score != null)
+            if (data.score != null)
             {
                 score = (float)data.score;
             }
@@ -132,7 +132,7 @@ namespace TN.Tollcollection.ALPR.Entity
                 score = 0;
             }
 
-            if(data.value != null)
+            if (data.value != null)
             {
                 code = (string)data.value;
             }
@@ -140,7 +140,7 @@ namespace TN.Tollcollection.ALPR.Entity
             {
                 code = "";
             }
-            
+
         }
     }
 
@@ -157,18 +157,18 @@ namespace TN.Tollcollection.ALPR.Entity
 
         public Vehicle(VehicleData data)
         {
-            if(data != null)
+            if (data != null)
             {
-                if(data.score != null)
+                if (data.score != null)
                 {
                     score = (float)data.score;
                 }
                 else
                 {
-                    score= 0;
+                    score = 0;
                 }
 
-                if(data.type != null)
+                if (data.type != null)
                 {
                     type = data.type;
                 }
@@ -176,7 +176,7 @@ namespace TN.Tollcollection.ALPR.Entity
                     type = "";
                 }
 
-                if(data.box != null)
+                if (data.box != null)
                 {
                     box = new Box(data.box);
                 }
@@ -188,7 +188,7 @@ namespace TN.Tollcollection.ALPR.Entity
             }
             else
             {
-                score= 0;
+                score = 0;
                 type = "";
                 box = new Box();
             }

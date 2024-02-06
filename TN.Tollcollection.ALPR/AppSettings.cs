@@ -34,6 +34,8 @@ namespace TN.Tollcollection.ALPR
 
         // URL API PLATE RECOGNIZER
         public static string ApiPlateRecognizerEntity = ConfigurationManager.AppSettings["ApiPlateRecognizerEntity"];
+        public static string ApiPlateRecognizerEntity1 = ConfigurationManager.AppSettings["ApiPlateRecognizerEntity1"];
+
         public static string TokenPP = ConfigurationManager.AppSettings["TokenPP"];
 
         // MODE DETECT
@@ -54,6 +56,9 @@ namespace TN.Tollcollection.ALPR
 
         // Chế độ trả về vị trí biển và MMC
         public static int ModeInfo = Convert.ToInt32(ConfigurationManager.AppSettings["ModeInfo"]);
+
+        public static int ModeApi = Convert.ToInt32(ConfigurationManager.AppSettings["ModeApi"]);
+
 
         // Loại camera
         public static int TypeCamera = Convert.ToInt32(ConfigurationManager.AppSettings["TypeCamera"]);

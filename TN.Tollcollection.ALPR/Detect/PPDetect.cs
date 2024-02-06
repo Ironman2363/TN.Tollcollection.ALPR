@@ -27,8 +27,18 @@ namespace TN.Tollcollection.ALPR.Detect
             // Biến lưu trữ thông tin biển số và vị trí kèm theo dữ liệu MMC (Make, Model, Color).
             string plateAndLocationAndMmc = "";
 
+            //var apiUrl;
             // Xây dựng URL gọi API dựa trên cấu hình ứng dụng và quyết định có bao gồm dữ liệu MMC hay không.
-            string url = AppSettings.ApiPlateRecognizerEntity;
+            string apiUrl = "";
+            if (AppSettings.ModeApi == 0)
+            {
+                apiUrl = AppSettings.ApiPlateRecognizerEntity;
+            }
+            if (AppSettings.ModeApi == 1)
+            {
+                apiUrl = AppSettings.ApiPlateRecognizerEntity1;
+            }
+            string url = apiUrl;
             // Kiểm tra nếu cấu hình yêu cầu bao gồm dữ liệu MMC và URL chưa chứa tham số 'mmc=true'
             if (includeMMC && !url.Contains("mmc=true"))
                 // Thêm tham số 'mmc=true' vào URL để yêu cầu dữ liệu MMC từ API (ParkPow)
@@ -74,10 +84,21 @@ namespace TN.Tollcollection.ALPR.Detect
             // Giải mã nội dung của phản hồi từ API thành một đối tượng có kiểu là ANPRPlatePP
 
             // Chuyển đổi chuỗi JSON từ phản hồi thành đối tượng ANPRPlatePP bằng phương thức DeserializeObject của lớp JsonConvert
+            ANPRPlatePP data = null; // Khai báo biến data ở ngoài phạm vi của các vòng điều kiện để đảm bảo truy cập trong toàn bộ phạm vi
 
-            var data = JsonConvert.DeserializeObject<ANPRPlatePPData>(response.Content);
+            if (AppSettings.ModeApi == 0)
+            {
+                var dataMode0 = JsonConvert.DeserializeObject<ANPRPlatePP>(response.Content);
+                data = dataMode0;
+            }
+            if (AppSettings.ModeApi == 1)
+            {
+                var dataMode1 = JsonConvert.DeserializeObject<ANPRPlatePPData>(response.Content);
+                data = new ANPRPlatePP(dataMode1);
+            }
 
-            ANPRPlatePP plateRecognizer = new ANPRPlatePP(data);
+            var plateRecognizer = data;
+
             stopWatch.Stop();
 
             // Ghi log debug về kết quả nhận dạng từ API PP.
